@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Teste</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    .css-teste {
+      color: blue;
+    }
+  </style>
+
+  <script type="text/babel">
+    const app = document.getElementById('app')
+    const testeElemento = React.createElement("h1", null, "Isto é um teste")
+    const testeElemento2 = React.createElement("h1", { className: 'css-teste' }, "Isto é um teste 2")
+
+    ReactDOM.render([testeElemento, testeElemento2], app)
+  </script>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>

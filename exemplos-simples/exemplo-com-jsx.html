@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Teste</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        .css-teste {
+            color: blue;
+        }
+    </style>
+
+    <script type="text/babel">
+        const app = document.getElementById('app')
+
+        class TesteElemento extends React.Component {
+            render() {
+                return (
+                    <h1>Isto é um teste</h1>
+                );
+            }
+        }
+
+        class TesteElemento2 extends React.Component {
+            render() {
+                return (
+                    <h2 className='css-teste'>Isto é um teste 2</h2>
+                );
+            }
+        }
+
+
+        class ExibeContador extends React.Component {
+            render() {
+                return (
+                    <h3>Quantidade Automatico: {this.props.contador} </h3>
+                )
+            }
+        }
+
+        const ExibeContadorV2 = (props) => (
+            <h3>Quantidade Manual: {props.contador} </h3>
+        )
+
+        const BotaoContador = (props) => (
+            <div>
+                <button onClick={props.funcaoClick}>{props.nome}</button>
+            </div>
+        )
+
+        class Contador extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    contadorAutomatico: 0,
+                    contadorManual: 0
+                }
+            }
+            render() {
+                setTimeout(() => {
+                    this.setState(
+                        {
+                            contadorAutomatico: this.state.contadorAutomatico + 1
+                        }
+                    )
+                }, 1000)
+
+                return (
+                    <div>
+                        <ExibeContador contador={this.state.contadorAutomatico} />
+                    </div>
+                );
+            }
+        }
+
+        class ContadorV2 extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    contador: 0,
+                }
+            }
+
+            addContadorManual() {
+                this.setState(
+                    {
+                        contador: this.state.contador + 1
+                    }
+                )
+            }
+
+            subContadorManual() {
+                this.setState(
+                    {
+                        contador: this.state.contador - 1
+                    }
+                )
+            }
+
+            render() {
+                return (
+                    <div>
+                        <ExibeContadorV2 contador={this.state.contador} />
+                        <BotaoContador nome="+" funcaoClick={() => this.addContadorManual()} />
+                        <BotaoContador nome="-" funcaoClick={() => this.subContadorManual()} />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render([<TesteElemento />, <TesteElemento2 />, <Contador />, <ContadorV2 />], app)
+    </script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+</html>
